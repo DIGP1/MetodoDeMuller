@@ -19,7 +19,7 @@ while continuar:
     menu()
     opcion = input("Selecciona una opción: ")
     if opcion == "1":
-       dataX, fx, error = formulainciales.pedirInformacion()
+       formulainciales.pedirInformacion()
 
     elif opcion == "2":
         print("2")
