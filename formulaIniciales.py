@@ -70,6 +70,11 @@ class formulainciales:
         #print(fx.subs(x,dataX[1]))
         #print(fx.subs(x,dataX[2]) - fx.subs(x,dataX[1]))
 
+<<<<<<< HEAD
+        print("sigma 1",Sigma0)
+        pprint(x3)
+=======
+>>>>>>> 2f166535c67c86ff5493da3b0c7ba03f1de74538
     
 
 
