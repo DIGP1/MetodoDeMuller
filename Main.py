@@ -6,34 +6,35 @@ import numpy as np
 
 def menu():
     print("---------------------Metodo de Muller------------------")
-    print("1. Opción 1")
-    print("2. Opción 2")
-    print("3. Opción 3")
-    print("4. Salir")
+    print("1. Encontrar una raiz")
+    print("2. Mostrar Grafica")
+    print("3. Salir")
+
+def pedirInformacion():
+    x = symbols('x')
+    dataX = []
+    fx = input('Ingrese el f(x) de la raiz a encontrar:\n')
+    expresion = sympify(fx)
+    for i in range(3):
+        dataX.append(float(input('Ingrese el X'+str(i))))
+    margenError = float(input('Ingrese el margen de error: \n'))
+    return dataX,expresion, margenError
 
 continuar = True
 
 while continuar:
     menu()
     opcion = input("Selecciona una opción: ")
-
     if opcion == "1":
-        print("1")
-        
+        pedirInformacion()
 
     elif opcion == "2":
         print("2")
         
-
     elif opcion == "3":
-        print(" 3")
-       
-
-    elif opcion == "4":
         print("Saliendo del programa...")
         continuar = False
         
-
     else:
         print("Opción inválida. Por favor, selecciona una opción válida.")
 
