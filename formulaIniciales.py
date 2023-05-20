@@ -1,5 +1,6 @@
 from sympy import *
 import pandas as pd
+import matplotlib.pyplot as plt
 
 class formulainciales:
    
@@ -15,14 +16,17 @@ class formulainciales:
         #Se realiza la primera iteracion
         mError = 100
         iteracion = 1
+        datosTabla = []
         while mError> margenError: 
             dataX[0],dataX[1],dataX[2],mError,fx = formulainciales.iterar(dataX,fx,x)
             print("=========================================")
             print("Raiz en la iteracion "+str(iteracion)+" es: "+str(dataX[2]))
             print("margen de error = "+str(mError))
-            print(dataX[2])
+            fila = [iteracion,dataX[1], dataX[2],mError]
+            datosTabla.append(fila)
             iteracion +=1
-
+        return datosTabla
+        
 
     def iterar(datosX, fx,X):
         #econtrando h1 y h0
@@ -70,7 +74,15 @@ class formulainciales:
         #print(fx.subs(x,dataX[1]))
         #print(fx.subs(x,dataX[2]) - fx.subs(x,dataX[1]))
 
-    
+    def presentacionDeInformacion(tabla):
+         encabezados =['Iteracion','Raiz anterior','Raiz resultante', 'Margen de error %']
+
+         df = pd.DataFrame(tabla, columns=encabezados)
+         print(df)
+
+
+
+
 
 
 
