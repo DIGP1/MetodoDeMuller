@@ -34,7 +34,7 @@ class formulainciales:
         else:
               x3= dataX[2] + -2*c / (b-sqrt(b**2-(4*a*c)))
 
-        print()
+        print("sigma 1",Sigma0)
         pprint(x3)
     
 
