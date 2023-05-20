@@ -1,6 +1,7 @@
 from sympy import *
 import pandas as pd
 import numpy as np 
+from formulaIniciales import *
 
 
 
@@ -10,15 +11,7 @@ def menu():
     print("2. Mostrar Grafica")
     print("3. Salir")
 
-def pedirInformacion():
-    x = symbols('x')
-    dataX = []
-    fx = input('Ingrese el f(x) de la raiz a encontrar:\n')
-    expresion = sympify(fx)
-    for i in range(3):
-        dataX.append(float(input('Ingrese el X'+str(i))))
-    margenError = float(input('Ingrese el margen de error: \n'))
-    return dataX,expresion, margenError
+
 
 continuar = True
 
@@ -26,7 +19,7 @@ while continuar:
     menu()
     opcion = input("Selecciona una opción: ")
     if opcion == "1":
-        pedirInformacion()
+       dataX, fx, error = formulainciales.pedirInformacion()
 
     elif opcion == "2":
         print("2")
