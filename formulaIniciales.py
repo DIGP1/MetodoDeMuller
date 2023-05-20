@@ -13,11 +13,15 @@ class formulainciales:
             dataX.append(float(input('Ingrese el X'+str(i))))
         margenError = float(input('Ingrese el margen de error: \n'))
         #Se realiza la primera iteracion
-        ite = 5
-        dataX[0],dataX[1],dataX[2],mError = formulainciales.iterar(dataX,fx,x)
-        print("Raiz = "+str(dataX[2]))
-        print("margen de error = "+str(mError))
-        print(dataX[2])
+        mError = 100
+        iteracion = 1
+        while mError> margenError: 
+            dataX[0],dataX[1],dataX[2],mError,fx = formulainciales.iterar(dataX,fx,x)
+            print("=========================================")
+            print("Raiz en la iteracion "+str(iteracion)+" es: "+str(dataX[2]))
+            print("margen de error = "+str(mError))
+            print(dataX[2])
+            iteracion +=1
 
 
     def iterar(datosX, fx,X):
@@ -26,9 +30,9 @@ class formulainciales:
         h1= datosX[2] - datosX[1]
 
         #econtrando Sigmas 0 y 1
-        Sigma0=  float(fx.subs(X,datosX[1])) - float(fx.subs(X,datosX[0]))
+        Sigma0=  fx.subs(X,datosX[1]) - fx.subs(X,datosX[0])
         Sigma0 /=h0
-        Sigma1=  float(fx.subs(X,datosX[2])) - float(fx.subs(X,datosX[1]))
+        Sigma1=  fx.subs(X,datosX[2]) - fx.subs(X,datosX[1])
         Sigma1 /=h1
 
         #encontrando constantes
@@ -41,17 +45,18 @@ class formulainciales:
        #encontrando x3
         if b >=0:
                 raiz = b+sqrt(b**2-(4*a*c))
-                x3= datosX[2] + -2*c / raiz
-                print(raiz)
+                divi = -2*c / raiz
+                x3= datosX[2] + divi
 
         else:
-                raiz = b-sqrt(b**2-(4*a*c))
-                x3= datosX[2] + -2*c / raiz
+            raiz = b+sqrt(b**2+(4*a*c))
+            divi = -2*c / raiz
+            x3= datosX[2] + divi
         #Calculo margen de error
         margenError = x3-datosX[2]
         margenError /= x3
         margenError = abs(margenError)*100
-        return datosX[1], datosX[2],x3,margenError
+        return datosX[1], datosX[2],x3,margenError,fx
         #print("h0: "+str(h0))
         #print("h1: "+str(h1))
         #print("Sigma0: "+str(Sigma0))
