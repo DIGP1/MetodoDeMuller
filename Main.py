@@ -31,14 +31,15 @@ while continuar:
     elif opcion == "4":
         print("Saliendo del programa...")
         continuar = False
+       
         
     else:
         print("Opción inválida. Por favor, selecciona una opción válida.")
     
-    if respuesta.lower() != "s":
-        continuar = False
+   
     
     respuesta = input("¿Deseas hacer algo más? (s/n): ")
-
+    if respuesta.lower() != "s":
+         continuar = False
 
     #Aasasasa

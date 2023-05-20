@@ -1,5 +1,6 @@
 from sympy import *
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
 class formulainciales:
@@ -17,6 +18,7 @@ class formulainciales:
         mError = 100
         iteracion = 1
         datosTabla = []
+        datosGrafica = []
         while mError> margenError: 
             dataX[0],dataX[1],dataX[2],mError,fx = formulainciales.iterar(dataX,fx,x)
             print("=========================================")
@@ -24,8 +26,24 @@ class formulainciales:
             print("margen de error = "+str(mError))
             fila = [iteracion,dataX[1], dataX[2],mError]
             datosTabla.append(fila)
+            #datosGrafica.append([dataX[1], dataX[2]])
             iteracion +=1
+            
+            
+        
+        #plt.plot(*zip(*datosGrafica), 'bo-')
+        #plt.xlabel('x')
+        #plt.ylabel('f(x)')
+        #plt.title('Última iteración del método de Muller')
+        #plt.grid(True)
+        #plt.show()
+
+
+
         return datosTabla
+        
+
+
         
 
     def iterar(datosX, fx,X):
@@ -33,11 +51,17 @@ class formulainciales:
         h0= datosX[1] - datosX[0]
         h1= datosX[2] - datosX[1]
 
+        if(h0!=0 and h1!=0):
+             Sigma0=  fx.subs(X,datosX[1]) - fx.subs(X,datosX[0])
+             Sigma0 /=h0
+             Sigma1=  fx.subs(X,datosX[2]) - fx.subs(X,datosX[1])
+             Sigma1 /=h1
+        else:
+             print("El ejercicio no tiene solucion ya que un Sigma da una inderteminancion")
+
         #econtrando Sigmas 0 y 1
-        Sigma0=  fx.subs(X,datosX[1]) - fx.subs(X,datosX[0])
-        Sigma0 /=h0
-        Sigma1=  fx.subs(X,datosX[2]) - fx.subs(X,datosX[1])
-        Sigma1 /=h1
+        
+        
 
         #encontrando constantes
         a= Sigma1-Sigma0
