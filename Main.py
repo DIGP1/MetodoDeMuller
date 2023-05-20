@@ -16,16 +16,21 @@ def menu():
 
 continuar = True
 tabla = []
+x = symbols('x')
+expre = ''
+raiz = 0.0
 while continuar:
     menu()
     opcion = input("Selecciona una opción: ")
     if opcion == "1":
-       tabla = formulainciales.pedirInformacion()
+       tabla,expre,raiz = formulainciales.pedirInformacion()
 
     elif opcion == "2":
-        print("2")
+        fx = sympify(expre)
+        formulainciales.mostrarGrafico(x,fx,raiz)
     
     elif opcion == "3":
+
         formulainciales.presentacionDeInformacion(tabla)
 
     elif opcion == "4":

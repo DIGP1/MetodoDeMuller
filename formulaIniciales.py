@@ -14,33 +14,27 @@ class formulainciales:
         for i in range(3):
             dataX.append(float(input('Ingrese el X'+str(i))))
         margenError = float(input('Ingrese el margen de error: \n'))
-        #Se realiza la primera iteracion
+
+        #Se declaran las variables para su posterior uso
         mError = 100
         iteracion = 1
         datosTabla = []
-        datosGrafica = []
+        raiz = 0.0
+        #Se empieza a iterar
         while mError> margenError: 
-            dataX[0],dataX[1],dataX[2],mError,fx = formulainciales.iterar(dataX,fx,x)
-            print("=========================================")
-            print("Raiz en la iteracion "+str(iteracion)+" es: "+str(dataX[2]))
-            print("margen de error = "+str(mError))
-            fila = [iteracion,dataX[1], dataX[2],mError]
-            datosTabla.append(fila)
-            #datosGrafica.append([dataX[1], dataX[2]])
-            iteracion +=1
-            
-            
-        
-        #plt.plot(*zip(*datosGrafica), 'bo-')
-        #plt.xlabel('x')
-        #plt.ylabel('f(x)')
-        #plt.title('Última iteración del método de Muller')
-        #plt.grid(True)
-        #plt.show()
-
-
-
-        return datosTabla
+            try:
+                 dataX[0],dataX[1],dataX[2],mError,fx = formulainciales.iterar(dataX,fx,x)
+                 print("=========================================")
+                 print("Raiz en la iteracion "+str(iteracion)+" es: "+str(dataX[2]))
+                 print("margen de error = "+str(mError))
+                 fila = [iteracion,dataX[1], dataX[2],mError]
+                 datosTabla.append(fila)#Se guardan los datos para ser mostrados en la tabla
+                 iteracion +=1
+                 raiz = dataX[2]
+            except:
+                 mError = margenError-1
+                 print("El ejercicio no tiene solucion ya que un Sigma da una inderteminancion")
+        return datosTabla,expresion,raiz
         
 
 
@@ -50,18 +44,15 @@ class formulainciales:
         #econtrando h1 y h0
         h0= datosX[1] - datosX[0]
         h1= datosX[2] - datosX[1]
-
+        
+        #econtrando Sigmas 0 y 1
         if(h0!=0 and h1!=0):
              Sigma0=  fx.subs(X,datosX[1]) - fx.subs(X,datosX[0])
              Sigma0 /=h0
              Sigma1=  fx.subs(X,datosX[2]) - fx.subs(X,datosX[1])
              Sigma1 /=h1
         else:
-             print("El ejercicio no tiene solucion ya que un Sigma da una inderteminancion")
-
-        #econtrando Sigmas 0 y 1
-        
-        
+             print("")
 
         #encontrando constantes
         a= Sigma1-Sigma0
@@ -101,8 +92,28 @@ class formulainciales:
     def presentacionDeInformacion(tabla):
          encabezados =['Iteracion','Raiz anterior','Raiz resultante', 'Margen de error %']
 
-         df = pd.DataFrame(tabla, columns=encabezados)
+         df = pd.DataFrame(tabla, columns=encabezados)#Se mandan los datos al dataFrame
          print(df)
+
+    def mostrarGrafico(x, fx,raiz):
+         #Se definen los valores de x
+         
+         rango_x = np.linspace(-5,5,100)
+         plt.plot([valor for valor in rango_x],[fx.subs(x,valorY) for valorY in rango_x])#Se guardan los datos de x y se evalua la funcion para encontrar "y" y guardarla para graficarla
+         plt.plot(raiz, fx.subs(x,raiz), 'ro', label='Raíz encontrada')#Se guarda la posicion de la raiz para ser mostrada en la grafica
+         plt.axhline(0, color="Black")
+         plt.axvline(0, color="Black")
+         plt.xlabel('x')
+         plt.ylabel('f(x)')
+
+
+         plt.xlim(-20,20)#Se limita los datos que se mostraran en x y "y"
+         plt.ylim(-20,20)
+
+
+         plt.legend()
+         plt.grid(True)
+         plt.show()#Se muestra la grafica
 
 
 
