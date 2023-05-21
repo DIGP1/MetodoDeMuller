@@ -2,6 +2,7 @@ from sympy import *
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 class formulainciales:
    
@@ -9,12 +10,13 @@ class formulainciales:
     def pedirInformacion():
          
         x = symbols('x') #se define la variable que vamos a evaluar
+        
         dataX = [] #creamos un arreglo que almacenara los puntos x0 x1 x2
         expresion = input('Ingrese el f(x) de la raiz a encontrar:\n')
         fx = sympify(expresion) #pedimos datos de la funcion y usamos la funcion sympify
 
-        for i in range(3):  #definimos un for donde vamos ir agregando al arreglo de los datos por medio del usuario
-            dataX.append(float(input('Ingrese el X'+str(i))))
+        for i in range(3):  #definimos un for donde vamos ir agregando al arreglo esos daatos por medio del usuaario
+            dataX.append(float(input('Ingrese el X-'+str(i))))
         margenError = float(input('Ingrese el margen de error: \n'))#pedimos el error
 
         #Se declaran las variables para su posterior uso
@@ -22,6 +24,7 @@ class formulainciales:
         iteracion = 1
         datosTabla = []
         raiz = 0.0
+        valor=0
         #Se empieza a iterar
         while mError> margenError: 
             try:
@@ -29,15 +32,15 @@ class formulainciales:
                  print("=========================================")
                  print("Raiz en la iteracion "+str(iteracion)+" es: "+str(dataX[2]))
                  print("margen de error = "+str(mError))
+                 #print("Con cuantos digitos desea redondear"+str(valor))
                  fila = [iteracion,dataX[1], dataX[2],mError]
                  datosTabla.append(fila)#Se guardan los datos para ser mostrados en la tabla
                  iteracion +=1
                  raiz = dataX[2]
-            except  :
+            except:
                  
-                 mError = margenError-1
-                 print("El ejercicio no tiene solucion ya que un Sigma da una inderteminancion")
-                 mError
+                mError = margenError-1
+                print("El ejercicio no cumple con las condiciones")
         return datosTabla,expresion,raiz
         
 
@@ -74,31 +77,38 @@ class formulainciales:
         
        #encontrando x3
         if b >=0:
-                raiz = b+sqrt(b**2-(4*a*c))
-                divi = -2*c / raiz
-                x3= round(datosX[2] + divi, 5 )
+             
+            
+               raiz = b+ math.sqrt(b**2-(4*a*c))
+               divi = -2*c / raiz
+               x3= round(datosX[2] + divi, 5 )
+               
 
         else:
-            raiz = b+sqrt(b**2+(4*a*c))
+        
+            raiz = b-math.sqrt(b**2+(4*a*c))
             divi = -2*c / raiz
             x3= round(datosX[2] + divi, 5 )
+
+
         #Calculo margen de error
         margenError = x3-datosX[2]
         margenError /= x3
         margenError = round(abs(margenError)*100,5)
         return datosX[1], datosX[2],x3,margenError,fx
-        #print("h0: "+str(h0))
-        #print("h1: "+str(h1))
-        #print("Sigma0: "+str(Sigma0))
-        #print("Sigma1: "+str(Sigma1))
-        #print("a: "+str(a))
-        #print("b: "+str(b))
-        #print("c: "+str(c))
-        #print("x3: "+str(x3))
-        #print(dataX[2])
-        #print(fx.subs(x,dataX[2]))
-        #print(fx.subs(x,dataX[1]))
-        #print(fx.subs(x,dataX[2]) - fx.subs(x,dataX[1]))
+    
+        print("h0: "+str(h0))
+        print("h1: "+str(h1))
+        print("Sigma0: "+str(Sigma0))
+        print("Sigma1: "+str(Sigma1))
+        print("a: "+str(a))
+        print("b: "+str(b))
+        print("c: "+str(c))
+        print("x3: "+str(x3))
+        print(dataX[2])
+        print(fx.subs(x,dataX[2]))
+        print(fx.subs(x,dataX[1]))
+        print(fx.subs(x,dataX[2]) - fx.subs(x,dataX[1]))
 
     def presentacionDeInformacion(tabla):
          encabezados =['Iteracion','Raiz anterior','Raiz resultante', 'Margen de error %']
@@ -116,6 +126,7 @@ class formulainciales:
          plt.axvline(0, color="Black")
          plt.xlabel('x')
          plt.ylabel('f(x)')
+         plt.title("RAIZ")
 
 
          plt.xlim(-20,20)#Se limita los datos que se mostraran en x y "y"
