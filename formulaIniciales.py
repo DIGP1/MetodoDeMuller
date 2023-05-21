@@ -9,7 +9,6 @@ class formulainciales:
     def pedirInformacion():
          
         x = symbols('x') #se define la variable que vamos a evaluar
-        
         dataX = [] #creamos un arreglo que almacenara los puntos x0 x1 x2
         expresion = input('Ingrese el f(x) de la raiz a encontrar:\n')
         fx = sympify(expresion) #pedimos datos de la funcion y usamos la funcion sympify
@@ -36,8 +35,9 @@ class formulainciales:
                  raiz = dataX[2]
             except  :
                  
-                 mError == margenError-1
+                 mError = margenError-1
                  print("El ejercicio no tiene solucion ya que un Sigma da una inderteminancion")
+                 mError
         return datosTabla,expresion,raiz
         
 
