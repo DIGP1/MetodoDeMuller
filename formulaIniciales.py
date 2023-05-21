@@ -34,9 +34,9 @@ class formulainciales:
                  datosTabla.append(fila)#Se guardan los datos para ser mostrados en la tabla
                  iteracion +=1
                  raiz = dataX[2]
-            except:
+            except  :
                  
-                 mError = margenError-1
+                 mError == margenError-1
                  print("El ejercicio no tiene solucion ya que un Sigma da una inderteminancion")
         return datosTabla,expresion,raiz
         
