@@ -76,16 +76,16 @@ class formulainciales:
         if b >=0:
                 raiz = b+sqrt(b**2-(4*a*c))
                 divi = -2*c / raiz
-                x3= datosX[2] + divi
+                x3= round(datosX[2] + divi, 5 )
 
         else:
             raiz = b+sqrt(b**2+(4*a*c))
             divi = -2*c / raiz
-            x3= datosX[2] + divi
+            x3= round(datosX[2] + divi, 5 )
         #Calculo margen de error
         margenError = x3-datosX[2]
         margenError /= x3
-        margenError = abs(margenError)*100
+        margenError = round(abs(margenError)*100,5)
         return datosX[1], datosX[2],x3,margenError,fx
         #print("h0: "+str(h0))
         #print("h1: "+str(h1))
