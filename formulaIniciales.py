@@ -5,15 +5,18 @@ import matplotlib.pyplot as plt
 
 class formulainciales:
    
+   #se define una funcion para pedir la informacion al usuario
     def pedirInformacion():
          
-        x = symbols('x')
-        dataX = []
+        x = symbols('x') #se define la variable que vamos a evaluar
+        
+        dataX = [] #creamos un arreglo que almacenara los puntos x0 x1 x2
         expresion = input('Ingrese el f(x) de la raiz a encontrar:\n')
-        fx = sympify(expresion)
-        for i in range(3):
+        fx = sympify(expresion) #pedimos datos de la funcion y usamos la funcion sympify
+
+        for i in range(3):  #definimos un for donde vamos ir agregando al arreglo esos daatos por medio del usuaario
             dataX.append(float(input('Ingrese el X'+str(i))))
-        margenError = float(input('Ingrese el margen de error: \n'))
+        margenError = float(input('Ingrese el margen de error: \n'))#pedimos el error
 
         #Se declaran las variables para su posterior uso
         mError = 100
@@ -32,6 +35,7 @@ class formulainciales:
                  iteracion +=1
                  raiz = dataX[2]
             except:
+                 
                  mError = margenError-1
                  print("El ejercicio no tiene solucion ya que un Sigma da una inderteminancion")
         return datosTabla,expresion,raiz
@@ -45,15 +49,22 @@ class formulainciales:
         h0= datosX[1] - datosX[0]
         h1= datosX[2] - datosX[1]
         
-        #econtrando Sigmas 0 y 1
-        if(h0!=0 and h1!=0):
-             Sigma0=  fx.subs(X,datosX[1]) - fx.subs(X,datosX[0])
-             Sigma0 /=h0
-             Sigma1=  fx.subs(X,datosX[2]) - fx.subs(X,datosX[1])
-             Sigma1 /=h1
-        else:
-             print("")
 
+     #validar cambio de signo
+
+        
+             #econtrando Sigmas 0 y 1
+        if(h0!=0 and h1!=0):
+                  Sigma0=  fx.subs(X,datosX[1]) - fx.subs(X,datosX[0])
+                  Sigma0 /=h0
+                  Sigma1=  fx.subs(X,datosX[2]) - fx.subs(X,datosX[1])
+                  Sigma1 /=h1
+        else:
+                 print(ZeroDivisionError)
+
+
+       
+        
         #encontrando constantes
         a= Sigma1-Sigma0
         a /= h1-h0 
