@@ -14,7 +14,7 @@ class formulainciales:
         expresion = input('Ingrese el f(x) de la raiz a encontrar:\n')
         fx = sympify(expresion) #pedimos datos de la funcion y usamos la funcion sympify
 
-        for i in range(3):  #definimos un for donde vamos ir agregando al arreglo esos daatos por medio del usuaario
+        for i in range(3):  #definimos un for donde vamos ir agregando al arreglo de los datos por medio del usuario
             dataX.append(float(input('Ingrese el X'+str(i))))
         margenError = float(input('Ingrese el margen de error: \n'))#pedimos el error
 
